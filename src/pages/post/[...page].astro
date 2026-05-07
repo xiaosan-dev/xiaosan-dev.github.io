@@ -43,11 +43,7 @@ const paginationProps = {
 
 <PageLayout meta={{ title: '文章' }}>
 	<div class='w-full'>
-		<Button title='返回' href={url('/')} style='button'>
-			<Icon width='14' height='14' slot='icon-before' name='arrow-left-line' />
-		</Button>
-
-		<h1 class='mb-6 mt-5 text-2xl font-bold'>文章</h1>
+		<h1 class='mb-6 mt-1 text-2xl font-bold'>文章</h1>
 		{page.data.length === 0 && <p>还没有文章~</p>}
 
 		{
@@ -75,7 +71,12 @@ const paginationProps = {
 								))}
 							</ul>
 							<span class='mt-4 block sm:text-end'>
-								<a aria-label='View all blog categories' class='' href={url('/tags/')} data-astro-prefetch>
+								<a
+									aria-label='View all blog categories'
+									class=''
+									href={url('/tags/')}
+									data-astro-prefetch
+								>
 									更多 →
 								</a>
 							</span>

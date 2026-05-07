@@ -3,7 +3,7 @@
 import PageLayout from '@/layouts/BaseLayout.astro'
 import Button from '@/components/Button.astro'
 import { Icon } from 'astro-icon/components'
-import { getAllPosts } from '@/utils'
+import { getAllPosts, url } from '@/utils'
 import { getPostUrlBySlug } from 'src/utils/post'
 import { formatDate } from 'src/utils/date'
 
@@ -12,7 +12,7 @@ interface Props {
   tags?: string[]
   categories?: string[]
 }
-const { keyword, tags, categories } = Astro.props
+const { tags } = Astro.props
 
 let posts = await getAllPosts()
 
@@ -61,11 +61,7 @@ function formatTag(tag: string[]) {
 <PageLayout meta={{ title: '时间线' }}>
   <!-- <div class="px-8 py-6 w-full"> -->
     <div class='w-full'>
-		<Button title='返回' href='/' style='button'>
-			<Icon width='14' height='14' slot='icon-before' name='arrow-left-line' />
-		</Button>
-
-		<div class='mt-5 flex w-full flex-col gap-y-10'>
+		<div class='mt-1 flex w-full flex-col gap-y-10'>
 			<div>
 				<h1 class='mb-1 text-2xl font-bold'>时间线</h1>
 			</div>

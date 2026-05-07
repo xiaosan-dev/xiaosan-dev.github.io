@@ -7,6 +7,7 @@ import Button from '@/components/Button.astro'
 
 import PageLayout from './BaseLayout.astro'
 import { Icon } from 'astro-icon/components'
+import { url } from '@/utils'
 
 interface Props {
 	post: CollectionEntry<'post'>
@@ -25,10 +26,7 @@ const { headings } = await post.render()
 
 <PageLayout meta={{ articleDate, description, ogImage: socialImage, title }}>
 	<div class='w-full'>
-		<Button title='返回' href='/post' style='button'>
-			<Icon width={14} height={14} slot='icon-before' name='arrow-left-line' />
-		</Button>
-		<div class='mt-8 gap-x-10 lg:flex lg:items-start'>
+		<div class='mt-1 gap-x-10 lg:flex lg:items-start'>
 			{!!headings.length && <TOC headings={headings} />}
 			<article class='flex-grow break-words' data-pagefind-body>
 				<div id='blog-hero'><BlogHero content={post} /></div>

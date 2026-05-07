@@ -4,6 +4,7 @@ import ToolSection from '@/components/ToolSection.astro'
 import Button from '@/components/Button.astro'
 import { Icon } from 'astro-icon/components'
 import { TOOL } from '@/consts'
+import { url } from '@/utils'
 
 const DEVELOPMENT = [
 	{
@@ -29,7 +30,7 @@ const DEVELOPMENT = [
 		description: '开源免费截图',
 		href: 'https://pixpinapp.com/',
 		iconPath: 'letter-p'
-	},
+	}
 ]
 
 const DESIGN = [
@@ -53,7 +54,7 @@ const DOC = [
 		description: 'Astro Documentation',
 		href: 'https://docs.astro.build/zh-cn/getting-started/',
 		iconPath: 'astro'
-	},
+	}
 ]
 
 const PRODUCTIVITY = [
@@ -62,17 +63,13 @@ const PRODUCTIVITY = [
 		description: '开源Github',
 		href: 'https://hellogithub.com/',
 		iconPath: 'website'
-	},
+	}
 ]
 ---
 
 <PageLayout meta={{ title: '工具' }}>
 	<div class='w-full'>
-		<Button title='返回' href='/' style='button'>
-			<Icon width='14' height='14' slot='icon-before' name='arrow-left-line' />
-		</Button>
-
-		<div class='mt-5 flex w-full flex-col gap-y-10'>
+		<div class='mt-1 flex w-full flex-col gap-y-10'>
 			<div>
 				<h1 class='mb-1 text-2xl font-bold'>{TOOL}</h1>
 				<p>好用的工具，软件以及文档</p>

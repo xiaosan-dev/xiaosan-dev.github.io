@@ -9,7 +9,7 @@ const allTags = getUniqueTagsWithCount(allPosts)
 
 const meta = {
 	description: "A list of all the topics I've written about in my post",
-	title: 'All Tags'
+	title: '标签'
 }
 ---
 
@@ -31,9 +31,7 @@ const meta = {
 							>
 								&#35;{tag}
 							</a>
-							<span class='inline-block'>
-								- {val} 篇{val > 1 && 's'}
-							</span>
+							<span class='inline-block'>- {val} 篇</span>
 						</li>
 					))}
 				</ul>

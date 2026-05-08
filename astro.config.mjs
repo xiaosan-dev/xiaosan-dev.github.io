@@ -23,7 +23,7 @@ export default defineConfig({
 		icon(),
 		pagefind(),
   ],
-  base: '/astro-blog/',
+  base: '/blog/',
   output: 'static',
   markdown: {
 		syntaxHighlight: 'shiki',
@@ -33,7 +33,7 @@ export default defineConfig({
 				dark: 'github-dark',
 			},
 			wrap: true,
-			// langs: ['java', 'html', 'javascript', 'swift', 'typescript', 'shell', 'kotlin', 'groovy'],
+			langs: ['java', 'html', 'javascript', 'swift', 'typescript', 'shell', 'kotlin', 'groovy'],
 		},
 		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
 		rehypePlugins: [
@@ -41,7 +41,7 @@ export default defineConfig({
 				rehypeExternalLinks,
 				{
 					target: '_blank',
-					rel: ['nofollow, noopener, noreferrer']
+					rel: ['nofollow', 'noopener', 'noreferrer']
 				}
 			]
 		],

@@ -34,7 +34,7 @@ const { tag } = Astro.params
 
 const meta = {
 	description: `View all posts with the tag - ${tag}`,
-	title: `Tag: ${tag}`
+	title: `标签: ${tag}`
 }
 
 const paginationProps = {
@@ -56,8 +56,8 @@ const paginationProps = {
 <PageLayout meta={meta}>
 	<div class='w-full'>
 		<h1 class='mb-6 mt-1 flex items-end gap-x-2 text-2xl font-bold'>
-			Tags:
-			<span class='text-xl'>#{tag}</span>
+			标签:
+			<span class='text-xl'>{tag}</span>
 		</h1>
 		<section aria-label='Blog post list'>
 			<ul class='flex flex-col gap-y-3 text-start'>

@@ -9,8 +9,6 @@ import { getAllPosts, getUniqueTags, sortMDByDate, url } from '@/utils'
 import { NAME, ABOUT, POST, TAG } from '@/consts'
 import Button from '@/components/Button.astro'
 
-const languages = ['lorem', 'ipsum']
-
 const MAX_POSTS = 10
 const allPosts = await getAllPosts()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
@@ -48,7 +46,7 @@ const uniqueTags = getUniqueTags(allPosts)
 		</Section>
 		{
 			allPostsByDate.length > 0 && (
-				<Section title={POST}>
+				<Section title={POST} path='/post/'>
 					<ul class='flex flex-col gap-y-2'>
 						{allPostsByDate.map((p) => (
 							<li class='flex flex-col gap-x-2 sm:flex-row'>
@@ -61,8 +59,8 @@ const uniqueTags = getUniqueTags(allPosts)
 		}
 
 		{
-			!!languages.length && (
-				<Section title={TAG}>
+			(
+				<Section title={TAG} path='/tags/'>
 					<div>
 						{!!uniqueTags.length && (
 							<ul class='text-bgColor flex flex-wrap gap-2'>

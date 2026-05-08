@@ -1,9 +1,7 @@
 
 ---
 import PageLayout from '@/layouts/BaseLayout.astro'
-import Button from '@/components/Button.astro'
-import { Icon } from 'astro-icon/components'
-import { getAllPosts, url } from '@/utils'
+import { getAllPosts } from '@/utils'
 import { getPostUrlBySlug } from 'src/utils/post'
 import { formatDate } from 'src/utils/date'
 
@@ -125,7 +123,7 @@ function formatTag(tag: string[]) {
         }
         .dash-line::before {
             content: "";
-            @apply w-[10%] h-full absolute -top-1/2 left-[calc(50%_-_1px)] -top-[50%] border-l-[2px]
+            @apply w-[10%] h-full absolute -top-1/2 left-[calc(50%_-_1px)] border-l-[2px]
             border-dashed pointer-events-none border-[var(--line-color)] transition
         }
     }

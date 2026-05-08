@@ -23,7 +23,6 @@ export default defineConfig({
 		icon(),
 		pagefind(),
   ],
-  base: '/blog/',
   output: 'static',
   markdown: {
 		syntaxHighlight: 'shiki',

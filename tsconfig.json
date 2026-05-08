@@ -4,17 +4,13 @@
 		"ignoreDeprecations": "6.0",
 		"strictNullChecks": true,
 		"allowJs": true,
+		"types": ["astro/client"],
 		"baseUrl": ".",
 		"lib": ["es2022", "dom", "dom.iterable"],
 		"paths": {
-			"@/assets/*": ["src/assets/*"],
-			"@/components/*": ["src/components/*"],
-			"@/layouts/*": ["src/layouts/*"],
-			"@/utils": ["src/utils/index.ts"],
-			"@/types": ["src/types.ts"],
-			"@/site-config": ["src/site.config.ts"],
-			"@/consts": ["src/consts.ts"]
+			"@/*": ["src/*"]
 		}
 	},
+	"include": ["src"],
 	"exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
 }

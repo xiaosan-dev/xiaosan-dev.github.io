@@ -1,10 +1,20 @@
 import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
+import { getReadingTime } from './readingTime'
 
 /** Note: this function filters out draft post based on the environment */
 export async function getAllPosts() {
-	return await getCollection('post', ({ data }) => {
+	const posts = await getCollection('post', ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true
+	})
+	return posts.map((post) => {
+		return {
+			...post,
+			data: {
+				...post.data,
+				minutesRead: getReadingTime(post.body ?? '')
+			}
+		}
 	})
 }
 

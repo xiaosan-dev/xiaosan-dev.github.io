@@ -5,7 +5,7 @@ export {
 	getUniqueTags,
 	getUniqueTagsWithCount,
 	getPostUrlBySlug,
-	url
+	url,
 } from './post'
 export { getFormattedDate } from './date'
 export { generateToc } from './generateToc'

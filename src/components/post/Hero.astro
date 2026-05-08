@@ -8,11 +8,8 @@ interface Props {
 	content: CollectionEntry<'post'>
 }
 
-const {
-	content: { data, render }
-} = Astro.props
-
-const { remarkPluginFrontmatter } = await render()
+const { content } = Astro.props
+const { data } = content
 
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	month: 'long'
@@ -36,7 +33,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 <div class='flex flex-wrap items-center gap-x-3 gap-y-2'>
 	<p class='text-xs'>
 		<FormattedDate date={data.publishDate} dateTimeOptions={dateTimeOptions} /> /{' '}
-		{remarkPluginFrontmatter.minutesRead}
+		{data.minutesRead}
 	</p>
 </div>
 <h1 class='mt-2 text-3xl font-medium sm:mb-1'>

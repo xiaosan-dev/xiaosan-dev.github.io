@@ -2,7 +2,6 @@
 import { Icon } from 'astro-icon/components'
 import Search from '../Search.astro'
 import { url } from '@/utils'
-const { title } = Astro.props
 
 const items = [
 	{ label: '时间线', href: url('/timeline') },
@@ -10,15 +9,15 @@ const items = [
 ]
 ---
 
-<header class='mb-12 flex w-full flex-wrap pb-3 text-sm sm:flex-nowrap sm:justify-start'>
+<header
+	class='fixed top-0 z-50 flex w-full flex-wrap bg-background sm:flex-nowrap sm:justify-start'
+>
 	<nav
-		class='relative mx-auto flex w-full items-center justify-between sm:flex sm:items-center'
+		class='relative mx-auto flex h-14 w-full max-w-[80rem] items-center justify-between px-6 text-sm sm:flex sm:items-center sm:px-10 lg:px-10'
 		aria-label='global'
 	>
 		<div class='flex flex-row items-center'>
 			<a class='mr-2 flex-none text-xl font-semibold' href={url('/')} aria-label='Brand'>主页</a>
-			{!!title && <Icon width={10} height={10} name='nav-arrow-right' />}
-			<div class='ml-2'>{title}</div>
 		</div>
 
 		<div class='flex flex-row items-center justify-center gap-x-5 sm:gap-x-7'>

@@ -24,10 +24,10 @@ const {
 
 	<body class='flex flex-row justify-center bg-background'>
 		<ThemeProvider />
+		<Header title={title} />
 		<main
-			class='flex min-h-screen w-screen max-w-[80rem] flex-col items-center px-6 pb-10 pt-7 font-satoshi text-[0.92rem] leading-relaxed sm:px-10 lg:px-10'
+			class='flex min-h-screen w-screen max-w-[80rem] flex-col items-center px-6 pb-10 pt-20 font-satoshi text-[0.92rem] leading-relaxed sm:px-10 lg:px-10'
 		>
-			<Header title={title} />
 			<slot />
 			<Footer />
 		</main>

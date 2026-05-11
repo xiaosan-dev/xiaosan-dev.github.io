@@ -8,9 +8,10 @@
 
 ### Features:
 
-- [x] Search Support
-- [x] Tag support
-- [ ] Category support
-- [x] Sitemap support
-- [x] RSS Feed support
-- [ ] Markdown & MDX support
+- [x] Search
+- [x] Tag
+- [ ] Category
+- [x] Sitemap
+- [x] RSS Feed
+- [ ] Markdown & MDX
+- [x] Comment

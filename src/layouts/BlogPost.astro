@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content'
 
 import BlogHero from '@/components/post/Hero.astro'
+import Comment from '@/components/post/Comment.astro'
 import TOC from '@/components/post/TOC.astro'
 
 import PageLayout from './BaseLayout.astro'
@@ -32,6 +33,7 @@ const { headings } = await render(post)
 					class='prose prose-base prose-zinc mt-12 text-muted-foreground dark:prose-invert prose-headings:font-medium prose-headings:text-foreground prose-headings:before:absolute prose-headings:before:-ms-4 prose-th:before:content-none'
 				>
 					<slot />
+					<Comment />
 				</div>
 			</article>
 

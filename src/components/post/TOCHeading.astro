@@ -13,9 +13,11 @@ const {
 <li class={`${depth > 2 ? 'ms-2' : ''}`}>
 	<a
 		aria-label={`Scroll to section: ${text}`}
-		class={`block line-clamp-2  ${depth <= 2 ? 'mt-2' : 'mt-1 text-sm'} text-foreground/75 transition-all hover:text-foreground`}
-		href={`#${slug}`}>{text}</a
+		class={`toc-link ${depth <= 2 ? 'mt-2' : 'mt-1 text-sm'}`}
+		href={`#${slug}`}
 	>
+		{text}
+	</a>
 	{
 		!!subheadings.length && (
 			<ul>
@@ -26,3 +28,15 @@ const {
 		)
 	}
 </li>
+
+<style is:global>
+	.toc-link {
+		@apply relative line-clamp-2 block text-foreground/50 transition-all duration-200 hover:text-foreground;
+	}
+	.toc-link[data-active='true'] {
+		@apply font-medium text-violet-300 dark:text-violet-200;
+	}
+	.toc-link[data-active='true']::after {
+		content: '✨';
+	}
+</style>

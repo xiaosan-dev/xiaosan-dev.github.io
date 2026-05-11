@@ -14,8 +14,70 @@ const toc = generateToc(headings)
 ---
 
 <aside class='sticky top-20 order-2 -me-28 hidden basis-60 lg:flex lg:flex-col'>
-	<h2 class='font-semibold'>TABLE OF CONTENTS</h2>
+	<h2 class='font-semibold'>目录</h2>
 	<ul class='text-card-foreground'>
 		{toc.map((heading) => <TOCHeading heading={heading} />)}
 	</ul>
 </aside>
+
+<script is:inline>
+	let observer = null
+
+	const initTOC = () => {
+		if (observer) {
+			observer.disconnect()
+		}
+
+		const links = document.querySelectorAll('.toc-link')
+
+		if (!links.length) return
+
+		const map = new Map()
+
+		links.forEach((link) => {
+			const id = link.getAttribute('href')?.slice(1)
+
+			if (!id) return
+
+			const heading = document.getElementById(id)
+
+			if (!heading) return
+
+			map.set(heading, link)
+		})
+
+		const setActiveLink = (activeLink) => {
+			links.forEach((link) => {
+				link.dataset.active = 'false'
+			})
+
+			activeLink.dataset.active = 'true'
+		}
+
+		observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (!entry.isIntersecting) return
+
+				const link = map.get(entry.target)
+
+				if (!link) return
+
+				setActiveLink(link)
+			})
+		})
+
+		map.forEach((_, heading) => observer.observe(heading))
+	}
+
+	const runInitTOC = () => {
+		if (document.readyState !== 'loading') {
+			initTOC()
+		} else {
+			document.addEventListener('DOMContentLoaded', initTOC, { once: true })
+		}
+	}
+
+	runInitTOC()
+
+	document.addEventListener('astro:after-swap', initTOC)
+</script>

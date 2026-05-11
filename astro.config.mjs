@@ -4,34 +4,35 @@ import tailwind from '@astrojs/tailwind'
 import sitemap from '@astrojs/sitemap'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import rehypeExternalLinks from 'rehype-external-links'
+import rehypeSlug from 'rehype-slug'
 import expressiveCode from 'astro-expressive-code'
 import { expressiveCodeOptions } from './src/site.config'
 import icon from 'astro-icon'
-import pagefind from "astro-pagefind";
+import pagefind from 'astro-pagefind'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://xiaosan-dev.github.io',
-  integrations: [
-    expressiveCode(expressiveCodeOptions),
-    tailwind({
+	site: 'https://xiaosan-dev.github.io',
+	integrations: [
+		expressiveCode(expressiveCodeOptions),
+		tailwind({
 			applyBaseStyles: false
 		}),
 		sitemap(),
 		mdx(),
 		icon(),
-		pagefind(),
-  ],
-  output: 'static',
-  markdown: {
+		pagefind()
+	],
+	output: 'static',
+	markdown: {
 		syntaxHighlight: 'shiki',
 		shikiConfig: {
 			themes: {
 				light: 'github-light',
-				dark: 'github-dark',
+				dark: 'github-dark'
 			},
 			wrap: true,
-			langs: ['java', 'html', 'javascript', 'swift', 'typescript', 'shell', 'kotlin', 'groovy'],
+			langs: ['java', 'html', 'javascript', 'swift', 'typescript', 'shell', 'kotlin', 'groovy']
 		},
 		remarkPlugins: [remarkUnwrapImages],
 		rehypePlugins: [
@@ -41,7 +42,8 @@ export default defineConfig({
 					target: '_blank',
 					rel: ['nofollow', 'noopener', 'noreferrer']
 				}
-			]
+			],
+			rehypeSlug
 		],
 		remarkRehype: {
 			footnoteLabelProperties: {
@@ -49,5 +51,5 @@ export default defineConfig({
 			}
 		}
 	},
-	prefetch: true,
-});
+	prefetch: true
+})

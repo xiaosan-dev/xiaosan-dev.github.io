@@ -15,69 +15,19 @@ const toc = generateToc(headings)
 
 <aside class='sticky top-20 order-2 -me-28 hidden basis-60 lg:flex lg:flex-col'>
 	<h2 class='font-semibold'>目录</h2>
-	<ul class='text-card-foreground'>
-		{toc.map((heading) => <TOCHeading heading={heading} />)}
-	</ul>
+
+	<div class='flex items-stretch'>
+		<div class='relative mr-3 mt-3 w-[1px] bg-slate-200 dark:bg-slate-800'>
+			<div
+				class='toc-progress-bar absolute left-0 top-0 h-[18px] w-[1.5px] bg-[#00a98e] transition-all duration-100'
+			>
+			</div>
+		</div>
+
+		<ul class='text-card-foreground'>
+			{toc.map((heading) => <TOCHeading heading={heading} />)}
+		</ul>
+	</div>
 </aside>
 
-<script is:inline>
-	let observer = null
-
-	const initTOC = () => {
-		if (observer) {
-			observer.disconnect()
-		}
-
-		const links = document.querySelectorAll('.toc-link')
-
-		if (!links.length) return
-
-		const map = new Map()
-
-		links.forEach((link) => {
-			const id = link.getAttribute('href')?.slice(1)
-
-			if (!id) return
-
-			const heading = document.getElementById(id)
-
-			if (!heading) return
-
-			map.set(heading, link)
-		})
-
-		const setActiveLink = (activeLink) => {
-			links.forEach((link) => {
-				link.dataset.active = 'false'
-			})
-
-			activeLink.dataset.active = 'true'
-		}
-
-		observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				if (!entry.isIntersecting) return
-
-				const link = map.get(entry.target)
-
-				if (!link) return
-
-				setActiveLink(link)
-			})
-		})
-
-		map.forEach((_, heading) => observer.observe(heading))
-	}
-
-	const runInitTOC = () => {
-		if (document.readyState !== 'loading') {
-			initTOC()
-		} else {
-			document.addEventListener('DOMContentLoaded', initTOC, { once: true })
-		}
-	}
-
-	runInitTOC()
-
-	document.addEventListener('astro:after-swap', initTOC)
-</script>
+<script src='../../scripts/toc.ts'></script>

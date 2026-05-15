@@ -1,67 +1,69 @@
 ---
-export const prerender = true
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
 
-import type { GetStaticPaths, Page } from 'astro'
-import type { CollectionEntry } from 'astro:content'
+import Pagination from "@/components/Paginator.astro";
+import PostPreview from "@/components/post/PostPreview.astro";
+import PageLayout from "@/layouts/BaseLayout.astro";
+import { getAllPosts, getUniqueTags, sortMDByDate } from "@/utils";
 
-import Pagination from '@/components/Paginator.astro'
-import PostPreview from '@/components/post/PostPreview.astro'
-import PageLayout from '@/layouts/BaseLayout.astro'
-import { getAllPosts, getUniqueTags, sortMDByDate } from '@/utils'
+export const prerender = true;
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-	const allPosts = await getAllPosts()
-	const allPostsByDate = sortMDByDate(allPosts)
-	const uniqueTags = getUniqueTags(allPostsByDate)
+  const allPosts = await getAllPosts();
+  const allPostsByDate = sortMDByDate(allPosts);
+  const uniqueTags = getUniqueTags(allPostsByDate);
 
-	return uniqueTags.flatMap((tag) => {
-		const filterPosts = allPostsByDate.filter((post) => post.data.tags.includes(tag))
-		return paginate(filterPosts, {
-			pageSize: 10,
-			params: { tag }
-		})
-	})
-}
+  return uniqueTags.flatMap((tag) => {
+    const filterPosts = allPostsByDate.filter((post) =>
+      post.data.tags.includes(tag),
+    );
+    return paginate(filterPosts, {
+      pageSize: 10,
+      params: { tag },
+    });
+  });
+};
 
 interface Props {
-	page: Page<CollectionEntry<'post'>>
+  page: Page<CollectionEntry<"post">>;
 }
 
-const { page } = Astro.props
-const { tag } = Astro.params
+const { page } = Astro.props;
+const { tag } = Astro.params;
 
 const meta = {
-	description: `View all posts with the tag - ${tag}`,
-	title: `标签: ${tag}`
-}
+  description: `View all posts with the tag - ${tag}`,
+  title: `标签: ${tag}`,
+};
 
 const paginationProps = {
-	...(page.url.prev && {
-		prevUrl: {
-			text: `← 上一页`,
-			url: page.url.prev
-		}
-	}),
-	...(page.url.next && {
-		nextUrl: {
-			text: `下一页 →`,
-			url: page.url.next
-		}
-	})
-}
+  ...(page.url.prev && {
+    prevUrl: {
+      text: `← 上一页`,
+      url: page.url.prev,
+    },
+  }),
+  ...(page.url.next && {
+    nextUrl: {
+      text: `下一页 →`,
+      url: page.url.next,
+    },
+  }),
+};
 ---
 
 <PageLayout meta={meta}>
-	<div class='w-full'>
-		<h1 class='mb-6 mt-1 flex items-end gap-x-2 text-2xl font-bold'>
-			标签:
-			<span class='text-xl'>{tag}</span>
-		</h1>
-		<section aria-label='Blog post list'>
-			<ul class='flex flex-col gap-y-3 text-start'>
-				{page.data.map((p) => <PostPreview as='h2' post={p} withDesc />)}
-			</ul>
-			<Pagination {...paginationProps} />
-		</section>
-	</div>
+  <div class="w-full">
+    <h1 class="mb-6 mt-1 flex items-end gap-x-2 text-2xl font-bold">
+      标签:
+      <span class="text-xl">{tag}</span>
+    </h1>
+    <section aria-label="Blog post list">
+      <ul class="flex flex-col gap-y-3 text-start">
+        {page.data.map((p) => <PostPreview as="h2" post={p} withDesc />)}
+      </ul>
+      <Pagination {...paginationProps} />
+    </section>
+  </div>
 </PageLayout>

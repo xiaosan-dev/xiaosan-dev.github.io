@@ -1,33 +1,33 @@
 ---
-import type { MarkdownHeading } from 'astro'
-import { generateToc } from '@/utils'
+import type { MarkdownHeading } from "astro";
+import { generateToc } from "@/utils";
 
-import TOCHeading from './TOCHeading.astro'
+import TOCHeading from "./TOCHeading.astro";
 
 interface Props {
-	headings: MarkdownHeading[]
+  headings: MarkdownHeading[];
 }
 
-const { headings } = Astro.props
+const { headings } = Astro.props;
 
-const toc = generateToc(headings)
+const toc = generateToc(headings);
 ---
 
-<aside class='sticky top-20 order-2 -me-28 hidden basis-60 lg:flex lg:flex-col'>
-	<h2 class='font-semibold'>目录</h2>
+<aside class="sticky top-20 order-2 -me-28 hidden basis-60 lg:flex lg:flex-col">
+  <h2 class="font-semibold">目录</h2>
 
-	<div class='flex items-stretch'>
-		<div class='relative mr-3 mt-3 w-[1px] bg-slate-200 dark:bg-slate-800'>
-			<div
-				class='toc-progress-bar absolute left-0 top-0 h-[18px] w-[1.5px] bg-[#00a98e] transition-all duration-100'
-			>
-			</div>
-		</div>
+  <div class="flex items-stretch">
+    <div class="relative mr-3 mt-3 w-[1px] bg-slate-200 dark:bg-slate-800">
+      <div
+        class="toc-progress-bar absolute left-0 top-0 h-[18px] w-[1.5px] bg-[#00a98e] transition-all duration-100"
+      >
+      </div>
+    </div>
 
-		<ul class='text-card-foreground'>
-			{toc.map((heading) => <TOCHeading heading={heading} />)}
-		</ul>
-	</div>
+    <ul class="text-card-foreground">
+      {toc.map((heading) => <TOCHeading heading={heading} />)}
+    </ul>
+  </div>
 </aside>
 
-<script src='../../scripts/toc.ts'></script>
+<script src="../../scripts/toc.ts"></script>

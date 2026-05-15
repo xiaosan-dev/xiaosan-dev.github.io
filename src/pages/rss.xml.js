@@ -2,7 +2,7 @@ import rss from '@astrojs/rss'
 import { siteConfig } from '@/site.config'
 import { getAllPosts } from '@/utils'
 
-export const GET = async () => {
+export async function GET() {
 	const posts = await getAllPosts()
 
 	return rss({

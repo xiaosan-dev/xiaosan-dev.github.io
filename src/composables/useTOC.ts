@@ -1,4 +1,4 @@
-type TOCItem = {
+interface TOCItem {
 	heading: HTMLElement
 	link: HTMLAnchorElement
 }
@@ -35,7 +35,9 @@ export function useTOC() {
 		const visible = new Set<HTMLElement>()
 
 		const setActive = (link: HTMLAnchorElement | null) => {
-			links.forEach((l) => (l.dataset.active = 'false'))
+			links.forEach((l) => {
+				l.dataset.active = 'false'
+			})
 			if (link) link.dataset.active = 'true'
 		}
 
@@ -64,7 +66,9 @@ export function useTOC() {
 			}
 		)
 
-		items.forEach((i) => observer!.observe(i.heading))
+		items.forEach((i) => {
+			observer?.observe(i.heading)
+		})
 
 		// initial state
 		requestAnimationFrame(() => {

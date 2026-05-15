@@ -1,70 +1,77 @@
 ---
-import { Icon } from 'astro-icon/components'
-import Search from '../Search.astro'
-import { url } from '@/utils'
+import { Icon } from "astro-icon/components";
+import { url } from "@/utils";
+import Search from "../Search.astro";
 
 const items = [
-	{ label: '时间线', href: url('/timeline') },
-	{ label: '工具', href: url('/tools') }
-]
+  { label: "时间线", href: url("/timeline") },
+  { label: "工具", href: url("/tools") },
+];
 ---
 
 <header
-	class='fixed top-0 z-50 flex w-full flex-wrap bg-background sm:flex-nowrap sm:justify-start'
+  class="fixed top-0 z-50 flex w-full flex-wrap bg-background sm:flex-nowrap sm:justify-start"
 >
-	<nav
-		class='relative mx-auto flex h-14 w-full max-w-[80rem] items-center justify-between px-6 text-sm sm:flex sm:items-center sm:px-10 lg:px-10'
-		aria-label='global'
-	>
-		<div class='flex flex-row items-center'>
-			<a class='mr-2 flex-none text-xl font-semibold' href={url('/')} aria-label='Brand'>主页</a>
-		</div>
+  <nav
+    class="relative mx-auto flex h-14 w-full max-w-[80rem] items-center justify-between px-6 text-sm sm:flex sm:items-center sm:px-10 lg:px-10"
+    aria-label="global"
+  >
+    <div class="flex flex-row items-center">
+      <a
+        class="mr-2 flex-none text-xl font-semibold"
+        href={url("/")}
+        aria-label="Brand">主页</a
+      >
+    </div>
 
-		<div class='flex flex-row items-center justify-center gap-x-5 sm:gap-x-7'>
-			<Search />
-			{
-				items.map((item) => (
-					<a href={item.href} class='flex-none text-[1.05rem] font-medium hover:text-foreground/75'>
-						{item.label}
-					</a>
-				))
-			}
-			<a href={url('/rss.xml')} class='flex-none hover:text-foreground/75'>
-				<Icon width={14} height={14} name='rss' />
-			</a>
-			<button
-				id='toggleDarkMode'
-				class='relative rounded-md border border-border p-1.5 transition-all hover:bg-border'
-			>
-				<span class='sr-only'>Dark Theme</span>
-				<Icon
-					width='24'
-					height='24'
-					class='rotate-0 scale-100 transition-all dark:hidden dark:-rotate-90 dark:scale-0'
-					name='sun'
-				/>
-				<Icon
-					width='24'
-					height='24'
-					class='hidden rotate-90 scale-0 transition-all dark:block dark:rotate-0 dark:scale-100'
-					name='moon'
-				/>
-			</button>
-		</div>
-	</nav>
+    <div class="flex flex-row items-center justify-center gap-x-5 sm:gap-x-7">
+      <Search />
+      {
+        items.map((item) => (
+          <a
+            href={item.href}
+            class="flex-none text-[1.05rem] font-medium hover:text-foreground/75"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a href={url("/rss.xml")} class="flex-none hover:text-foreground/75">
+        <Icon width={14} height={14} name="rss" />
+      </a>
+      <button
+        id="toggleDarkMode"
+        class="relative rounded-md border border-border p-1.5 transition-all hover:bg-border"
+      >
+        <span class="sr-only">Dark Theme</span>
+        <Icon
+          width="24"
+          height="24"
+          class="rotate-0 scale-100 transition-all dark:hidden dark:-rotate-90 dark:scale-0"
+          name="sun"
+        />
+        <Icon
+          width="24"
+          height="24"
+          class="hidden rotate-90 scale-0 transition-all dark:block dark:rotate-0 dark:scale-100"
+          name="moon"
+        />
+      </button>
+    </div>
+  </nav>
 </header>
 
 <script>
-	function getCurrentTheme() {
-		return localStorage.getItem('theme')
-	}
+  function getCurrentTheme() {
+    return localStorage.getItem("theme");
+  }
 
-	const toggleDarkModeButton = document.getElementById('toggleDarkMode')
+  const toggleDarkModeButton = document.getElementById("toggleDarkMode");
 
-	toggleDarkModeButton?.addEventListener('click', () => {
-		const toggleDarkModeEvent = new CustomEvent('theme-change', {
-			detail: { theme: getCurrentTheme() === 'light' ? 'dark' : 'light' }
-		})
-		document.dispatchEvent(toggleDarkModeEvent)
-	})
+  toggleDarkModeButton?.addEventListener("click", () => {
+    const toggleDarkModeEvent = new CustomEvent("theme-change", {
+      detail: { theme: getCurrentTheme() === "light" ? "dark" : "light" },
+    });
+    document.dispatchEvent(toggleDarkModeEvent);
+  });
 </script>

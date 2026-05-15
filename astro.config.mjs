@@ -1,14 +1,14 @@
-import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
-import tailwind from '@astrojs/tailwind'
 import sitemap from '@astrojs/sitemap'
-import remarkUnwrapImages from 'remark-unwrap-images'
-import rehypeExternalLinks from 'rehype-external-links'
-import rehypeSlug from 'rehype-slug'
+import tailwind from '@astrojs/tailwind'
+import { defineConfig } from 'astro/config'
 import expressiveCode from 'astro-expressive-code'
-import { expressiveCodeOptions } from './src/site.config'
 import icon from 'astro-icon'
 import pagefind from 'astro-pagefind'
+import rehypeExternalLinks from 'rehype-external-links'
+import rehypeSlug from 'rehype-slug'
+import remarkUnwrapImages from 'remark-unwrap-images'
+import { expressiveCodeOptions } from './src/site.config'
 
 // https://astro.build/config
 export default defineConfig({

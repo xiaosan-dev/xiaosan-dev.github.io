@@ -1,70 +1,64 @@
 
 ---
+import { formatDate } from 'src/utils/date'
+import { getPostUrlBySlug } from 'src/utils/post'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import { getAllPosts } from '@/utils'
-import { getPostUrlBySlug } from 'src/utils/post'
-import { formatDate } from 'src/utils/date'
 
 interface Props {
-  keyword?: string
-  tags?: string[]
-  categories?: string[]
+	keyword?: string
+	tags?: string[]
+	categories?: string[]
 }
 const { tags } = Astro.props
 
 let posts = await getAllPosts()
 
 if (Array.isArray(tags) && tags.length > 0) {
-  posts = posts.filter(
-    post =>
-      Array.isArray(post.data.tags) &&
-      post.data.tags.some(tag => tags.includes(tag)),
-  )
+	posts = posts.filter(
+		(post) => Array.isArray(post.data.tags) && post.data.tags.some((tag) => tags.includes(tag))
+	)
 }
 
-
 const groups: { year: number; posts: typeof posts }[] = (() => {
-  const groupedPosts = posts.reduce(
-    (grouped: { [year: number]: typeof posts }, post) => {
-      const year = post.data.publishDate.getFullYear()
-      if (!grouped[year]) {
-        grouped[year] = []
-      }
-      grouped[year].push(post)
-      return grouped
-    },
-    {},
-  )
+	const groupedPosts = posts.reduce((grouped: { [year: number]: typeof posts }, post) => {
+		const year = post.data.publishDate.getFullYear()
+		if (!grouped[year]) {
+			grouped[year] = []
+		}
+		grouped[year].push(post)
+		return grouped
+	}, {})
 
 	for (const year in groupedPosts) {
-		groupedPosts[year].sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+		groupedPosts[year].sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
 	}
 
-  // convert the object to an array
-  const groupedPostsArray = Object.keys(groupedPosts).map(key => ({
-    year: Number.parseInt(key),
-    posts: groupedPosts[Number.parseInt(key)],
-  }))
+	// convert the object to an array
+	const groupedPostsArray = Object.keys(groupedPosts).map((key) => ({
+		year: Number.parseInt(key),
+		posts: groupedPosts[Number.parseInt(key)]
+	}))
 
-  // sort years by latest first
-  groupedPostsArray.sort((a, b) => b.year - a.year)
-  return groupedPostsArray
+	// sort years by latest first
+	groupedPostsArray.sort((a, b) => b.year - a.year)
+	return groupedPostsArray
 })()
 
 function formatTag(tag: string[]) {
-  return tag.map(t => `#${t}`).join(' ')
+	return tag.map((t) => `#${t}`).join(' ')
 }
 ---
 
 <PageLayout meta={{ title: '时间线' }}>
   <!-- <div class="px-8 py-6 w-full"> -->
-    <div class='w-full'>
-		<div class='mt-1 flex w-full flex-col gap-y-10'>
+    <div class="w-full">
+		<div class="mt-1 flex w-full flex-col gap-y-10">
 			<div>
-				<h1 class='mb-1 text-2xl font-bold'>时间线</h1>
+				<h1 class="mb-1 text-2xl font-bold">时间线</h1>
 			</div>
 		</div>
-    
+
       {
           groups.map(group => (
               <div>
@@ -76,7 +70,8 @@ function formatTag(tag: string[]) {
                       <div class="flex-1 transition text-left text-50">{group.posts.length} Posts</div>
                   </div>
                   {group.posts.map(post => (
-                      <a href={getPostUrlBySlug(post.id)}
+                      <a
+                        href={getPostUrlBySlug(post.id)}
                         aria-label={post.data.title}
                         class="group btn-plain block h-10 w-full rounded-lg hover:text-muted-foreground"
                       >

@@ -2,7 +2,7 @@ import { useTOC } from '@/composables'
 
 const toc = useTOC()
 
-const init = () => {
+function init() {
 	requestAnimationFrame(() => {
 		toc.mount()
 	})

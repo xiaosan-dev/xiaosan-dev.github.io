@@ -1,81 +1,81 @@
 ---
-import PageLayout from '@/layouts/BaseLayout.astro'
-import ToolSection from '@/components/ToolSection.astro'
-import { TOOL } from '@/consts'
+import ToolSection from "@/components/ToolSection.astro";
+import { TOOL } from "@/consts";
+import PageLayout from "@/layouts/BaseLayout.astro";
 
 const DEVELOPMENT = [
-	{
-		name: 'Bear',
-		description: 'Note',
-		href: 'https://bear.app/zh/',
-		iconPath: 'bear'
-	},
-	{
-		name: 'ChatGPT',
-		description: 'AI',
-		href: 'https://chat.openai.com/',
-		iconPath: 'chatgpt'
-	},
-	{
-		name: 'Devv',
-		description: 'AI',
-		href: 'https://devv.ai/zh/',
-		iconPath: 'devv'
-	},
-	{
-		name: 'PixPin',
-		description: '开源免费截图',
-		href: 'https://pixpinapp.com/',
-		iconPath: 'letter-p'
-	}
-]
+  {
+    name: "Bear",
+    description: "Note",
+    href: "https://bear.app/zh/",
+    iconPath: "bear",
+  },
+  {
+    name: "ChatGPT",
+    description: "AI",
+    href: "https://chat.openai.com/",
+    iconPath: "chatgpt",
+  },
+  {
+    name: "Devv",
+    description: "AI",
+    href: "https://devv.ai/zh/",
+    iconPath: "devv",
+  },
+  {
+    name: "PixPin",
+    description: "开源免费截图",
+    href: "https://pixpinapp.com/",
+    iconPath: "letter-p",
+  },
+];
 
 const DESIGN = [
-	{
-		name: 'Iconify',
-		description: 'Freedom to choose icons',
-		href: 'https://icon-sets.iconify.design/',
-		iconPath: 'iconify'
-	}
-]
+  {
+    name: "Iconify",
+    description: "Freedom to choose icons",
+    href: "https://icon-sets.iconify.design/",
+    iconPath: "iconify",
+  },
+];
 
 const DOC = [
-	{
-		name: 'Apple',
-		description: 'Apple Developer Documentation',
-		href: 'https://developer.apple.com/documentation/',
-		iconPath: 'apple'
-	},
-	{
-		name: 'Astro',
-		description: 'Astro Documentation',
-		href: 'https://docs.astro.build/zh-cn/getting-started/',
-		iconPath: 'astro'
-	}
-]
+  {
+    name: "Apple",
+    description: "Apple Developer Documentation",
+    href: "https://developer.apple.com/documentation/",
+    iconPath: "apple",
+  },
+  {
+    name: "Astro",
+    description: "Astro Documentation",
+    href: "https://docs.astro.build/zh-cn/getting-started/",
+    iconPath: "astro",
+  },
+];
 
 const PRODUCTIVITY = [
-	{
-		name: 'Hello Github',
-		description: '开源Github',
-		href: 'https://hellogithub.com/',
-		iconPath: 'website'
-	}
-]
+  {
+    name: "Hello Github",
+    description: "开源Github",
+    href: "https://hellogithub.com/",
+    iconPath: "website",
+  },
+];
 ---
 
-<PageLayout meta={{ title: '工具' }}>
-	<div class='w-full'>
-		<div class='mt-1 flex w-full flex-col gap-y-10'>
-			<div>
-				<h1 class='mb-1 text-2xl font-bold'>{TOOL}</h1>
-				<p>好用的工具，软件以及文档</p>
-			</div>
+<PageLayout meta={{ title: "工具" }}>
+  <div class="w-full">
+    <div class="mt-1 flex w-full flex-col gap-y-10">
+      <div>
+        <h1 class="mb-1 text-2xl font-bold">{TOOL}</h1>
+        <p>好用的工具，软件以及文档</p>
+      </div>
 
-			<ToolSection title='开发' tools={DEVELOPMENT} />
-			<ToolSection title='设计' tools={DESIGN} />
-			<ToolSection title='文档' tools={DOC} />
-			<ToolSection title='生产力' tools={PRODUCTIVITY} />
-		</div>
-	</div>
+      <ToolSection title="开发" tools={DEVELOPMENT} />
+      <ToolSection title="设计" tools={DESIGN} />
+      <ToolSection title="文档" tools={DOC} />
+      <ToolSection title="生产力" tools={PRODUCTIVITY} />
+    </div>
+  </div>
 </PageLayout>

@@ -1,79 +1,86 @@
 ---
-import PageLayout from '../layouts/BaseLayout.astro'
-import Section from '../components/Section.astro'
-import Label from '../components/Label.astro'
-import PostPreview from '@/components/post/PostPreview.astro'
+import { Icon } from "astro-icon/components";
+import Button from "@/components/Button.astro";
+import PostPreview from "@/components/post/PostPreview.astro";
+import { ABOUT, NAME, POST, TAG } from "@/consts";
 
-import { Icon } from 'astro-icon/components'
-import { getAllPosts, getUniqueTags, sortMDByDate, url } from '@/utils'
-import { NAME, ABOUT, POST, TAG } from '@/consts'
-import Button from '@/components/Button.astro'
+import { getAllPosts, getUniqueTags, sortMDByDate, url } from "@/utils";
+import Label from "../components/Label.astro";
+import Section from "../components/Section.astro";
+import PageLayout from "../layouts/BaseLayout.astro";
 
-const MAX_POSTS = 10
-const allPosts = await getAllPosts()
-const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
-const uniqueTags = getUniqueTags(allPosts)
+const MAX_POSTS = 10;
+const allPosts = await getAllPosts();
+const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
+const uniqueTags = getUniqueTags(allPosts);
 ---
 
-<PageLayout meta={{ title: '' }}>
-	<div class='flex w-full flex-col gap-y-10'>
-		<section class='flex flex-col items-center gap-y-7'>
-			<Icon width={100} height='auto' name='cat' />
+<PageLayout meta={{ title: "" }}>
+  <div class="flex w-full flex-col gap-y-10">
+    <section class="flex flex-col items-center gap-y-7">
+      <Icon width={100} height="auto" name="cat" />
 
-			<div class='flex flex-col items-center gap-y-4'>
-				<h1 class='text-3xl font-bold'>{NAME}</h1>
-				<div class='flex flex-wrap justify-center gap-x-7 gap-y-3'>
-					<Label title='软件开发者'>
-						<Icon width={20} height={20} name='bug' />
-					</Label>
-					<Label title='中国'>
-						<Icon width={20} height={20} name='location' />
-					</Label>
-					<a
-						class='inline-block transition-all hover:text-muted-foreground/75'
-						href='https://www.github.com/xiaosan-dev'
-					>
-						<Label title='Github' as='div' href='https://github.com/xiaosan-dev' target='_blank'>
-							<Icon width={20} height={20} name='github' />
-						</Label>
-					</a>
-				</div>
-			</div>
-		</section>
+      <div class="flex flex-col items-center gap-y-4">
+        <h1 class="text-3xl font-bold">{NAME}</h1>
+        <div class="flex flex-wrap justify-center gap-x-7 gap-y-3">
+          <Label title="软件开发者">
+            <Icon width={20} height={20} name="bug" />
+          </Label>
+          <Label title="中国">
+            <Icon width={20} height={20} name="location" />
+          </Label>
+          <a
+            class="inline-block transition-all hover:text-muted-foreground/75"
+            href="https://www.github.com/xiaosan-dev"
+          >
+            <Label
+              title="Github"
+              as="div"
+              href="https://github.com/xiaosan-dev"
+              target="_blank"
+            >
+              <Icon width={20} height={20} name="github" />
+            </Label>
+          </a>
+        </div>
+      </div>
+    </section>
 
-		<Section title={ABOUT}>
-			<p class='text-muted-foreground'>小伞是一只可爱的小猫！</p>
-		</Section>
-		{
-			allPostsByDate.length > 0 && (
-				<Section title={POST} path='/post/'>
-					<ul class='flex flex-col gap-y-2'>
-						{allPostsByDate.map((p) => (
-							<li class='flex flex-col gap-x-2 sm:flex-row'>
-								<PostPreview post={p} />
-							</li>
-						))}
-					</ul>
-				</Section>
-			)
-		}
+    <Section title={ABOUT}>
+      <p class="text-muted-foreground">小伞是一只可爱的小猫！</p>
+    </Section>
+    {
+      allPostsByDate.length > 0 && (
+        <Section title={POST} path="/post/">
+          <ul class="flex flex-col gap-y-2">
+            {allPostsByDate.map((p) => (
+              <li class="flex flex-col gap-x-2 sm:flex-row">
+                <PostPreview post={p} />
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )
+    }
 
-		{
-			(
-				<Section title={TAG} path='/tags/'>
-					<div>
-						{!!uniqueTags.length && (
-							<ul class='text-bgColor flex flex-wrap gap-2'>
-								{uniqueTags.map((tag) => (
-									<li>
-										<Button title={tag} href={url(`/tags/${tag}/`)} style='pill' />
-									</li>
-								))}
-							</ul>
-						)}
-					</div>
-				</Section>
-			)
-		}
-	</div>
+    <Section title={TAG} path="/tags/">
+      <div>
+        {
+          !!uniqueTags.length && (
+            <ul class="text-bgColor flex flex-wrap gap-2">
+              {uniqueTags.map((tag) => (
+                <li>
+                  <Button
+                    title={tag}
+                    href={url(`/tags/${tag}/`)}
+                    style="pill"
+                  />
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+    </Section>
+  </div>
 </PageLayout>

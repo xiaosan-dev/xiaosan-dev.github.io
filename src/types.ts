@@ -1,4 +1,4 @@
-export type SiteConfig = {
+export interface SiteConfig {
 	author: string
 	title: string
 	description: string
@@ -10,13 +10,13 @@ export type SiteConfig = {
 	}
 }
 
-export type PaginationLink = {
+export interface PaginationLink {
 	url: string
 	text?: string
 	srLabel?: string
 }
 
-export type SiteMeta = {
+export interface SiteMeta {
 	title?: string
 	description?: string
 	ogImage?: string | undefined

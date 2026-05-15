@@ -1,39 +1,39 @@
 ---
-import type { TocItem } from '@/utils'
+import type { TocItem } from "@/utils";
 
 interface Props {
-	heading: TocItem
+  heading: TocItem;
 }
 
 const {
-	heading: { depth, slug, subheadings, text }
-} = Astro.props
+  heading: { depth, slug, subheadings, text },
+} = Astro.props;
 ---
 
-<li class={`${depth > 2 ? 'ms-2' : ''}`}>
-	<a
-		aria-label={`Scroll to section: ${text}`}
-		class={`toc-link ${depth <= 2 ? 'mt-2' : 'mt-1 text-sm'}`}
-		href={`#${slug}`}
-	>
-		{text}
-	</a>
-	{
-		!!subheadings.length && (
-			<ul>
-				{subheadings.map((subheading) => (
-					<Astro.self heading={subheading} />
-				))}
-			</ul>
-		)
-	}
+<li class={`${depth > 2 ? "ms-2" : ""}`}>
+  <a
+    aria-label={`Scroll to section: ${text}`}
+    class={`toc-link ${depth <= 2 ? "mt-2" : "mt-1 text-sm"}`}
+    href={`#${slug}`}
+  >
+    {text}
+  </a>
+  {
+    !!subheadings.length && (
+      <ul>
+        {subheadings.map((subheading) => (
+          <Astro.self heading={subheading} />
+        ))}
+      </ul>
+    )
+  }
 </li>
 
 <style is:global>
-	.toc-link {
-		@apply relative line-clamp-2 block text-foreground/50 transition-all duration-200 hover:text-foreground;
-	}
-	.toc-link[data-active='true'] {
-		@apply font-medium text-violet-300 dark:text-violet-200;
-	}
+  .toc-link {
+    @apply relative line-clamp-2 block text-foreground/50 transition-all duration-200 hover:text-foreground;
+  }
+  .toc-link[data-active="true"] {
+    @apply font-medium text-violet-300 dark:text-violet-200;
+  }
 </style>
